@@ -33,6 +33,7 @@
         {   // to get cookie           
             let cookie= document.cookie;
             alert(`Cookies\n ${cookie}`);
+
             //set cookie
             localStorage.setItem('deleteCookie',cookie);
 
@@ -49,15 +50,21 @@
             }
             alert('cookie deleted') 
         }
-        function retrieveCookie(){
-            // alert("retrievCookie")
-            let deletedcookie = localStorage.getItem('deleteCookie');
-            if(deletedcookie){
-            alert("Deleted Cookies Retrieve")
-            alert(`Cookies\n ${deletedcookie}`); 
-            }else{
-              alert(`First Delete Cookies`)
-            }         
+        function retrieveCookie(){           
+            let deletedCookies = localStorage.getItem('deleteCookie');
+            if(deletedCookies){            
+                let retCookie= deletedCookies.split(';');
+                console.log(retCookie);
+                for(let i=0; i<retCookie.length;i++){
+                    document.cookie=retCookie[i]
+                }
+                alert("Cookie Retrieved")
+                localStorage.removeItem('deleteCookie');                  
+            }
+            else{
+                alert(`Please Delete Cookie First`)
+            } 
+        
         }        
     </script>
 </body>
